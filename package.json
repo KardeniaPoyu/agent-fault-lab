@@ -1,10 +1,12 @@
 {
   "name": "agent-fault-lab",
   "version": "0.1.0",
-  "description": "A local, reproducible chaos laboratory for tool-using agents.",
+  "description": "Reproducible chaos experiments for AI agents: inject real faults, inspect recovery, and detect duplicate side effects.",
   "type": "module",
   "private": true,
-  "engines": { "node": ">=22.13.0" },
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "start": "node src/cli.mjs serve",
     "dev": "node --watch src/cli.mjs serve",
@@ -13,5 +15,21 @@
     "check": "node scripts/check.mjs",
     "test:e2e": "node scripts/browser-test.mjs"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://github.com/KardeniaPoyu/agent-fault-lab#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KardeniaPoyu/agent-fault-lab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KardeniaPoyu/agent-fault-lab/issues"
+  },
+  "keywords": [
+    "ai-agents",
+    "chaos-engineering",
+    "fault-injection",
+    "idempotency",
+    "resilience",
+    "observability"
+  ]
 }
