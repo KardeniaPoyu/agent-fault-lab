@@ -13,10 +13,13 @@
     "demo": "node src/cli.mjs compare --scenario lost-response",
     "test": "node --test --test-concurrency=1 test/*.test.mjs",
     "check": "node scripts/check.mjs",
-    "test:e2e": "node scripts/browser-test.mjs"
+    "test:e2e": "node scripts/browser-test.mjs",
+    "build:demo": "node scripts/build-demo.mjs",
+    "test:demo": "node --test --test-concurrency=1 test/demo.test.mjs",
+    "test:demo:e2e": "node scripts/demo-browser-test.mjs"
   },
   "license": "MIT",
-  "homepage": "https://github.com/KardeniaPoyu/agent-fault-lab#readme",
+  "homepage": "https://kardeniapoyu.github.io/agent-fault-lab/",
   "repository": {
     "type": "git",
     "url": "https://github.com/KardeniaPoyu/agent-fault-lab.git"

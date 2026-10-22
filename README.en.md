@@ -13,6 +13,14 @@ Inject real faults. Inspect recovery. Catch duplicate side effects.
 
 </div>
 
+## Try it online
+
+**[Open the live demo →](https://kardeniapoyu.github.io/agent-fault-lab/)** · No login, installation, or API key.
+
+The online version is an explicitly labelled **browser protocol simulation** with all eight scenarios, strategy comparison, event playback, JSON export and browser-local history. It does not terminate real processes, break TCP connections, or call upstream tools. Simulated outcomes are not evidence of real-agent reliability. Use the local version below for actual fault injection.
+
+GitHub Pages deploys the demo automatically from `main`. Run `npm run build:demo` to generate `dist/` and preview with a static HTTP server. `npm run test:demo` compares the model against the real local engine scenario by scenario.
+
 ![Agent Fault Lab dashboard](docs/assets/dashboard.png)
 
 ## Why this exists

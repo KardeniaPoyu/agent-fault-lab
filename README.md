@@ -17,6 +17,14 @@
 
 </div>
 
+## 在线体验
+
+**[打开在线演示 →](https://kardeniapoyu.github.io/agent-fault-lab/)** · 无需登录、安装或 API Key。
+
+在线版是明确标注的**浏览器协议模拟**，支持八种场景、策略对比、事件回放、JSON 导出与浏览器本地历史。不会运行真实子进程、断开 TCP 连接或调用远程工具；模拟结果不构成真实 Agent 的可靠性证明。真实故障注入请使用下方本地快速开始。
+
+在线演示由 GitHub Pages 托管，推送 `main` 后自动更新。开发时执行 `npm run build:demo` 生成 `dist/`，通过静态 HTTP 服务预览；`npm run test:demo` 将模拟器与本地引擎逐场景对比。
+
 ![Agent Fault Lab dashboard](docs/assets/dashboard.png)
 
 ## 为什么需要它
