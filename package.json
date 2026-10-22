@@ -1,0 +1,17 @@
+{
+  "name": "agent-fault-lab",
+  "version": "0.1.0",
+  "description": "A local, reproducible chaos laboratory for tool-using agents.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "start": "node src/cli.mjs serve",
+    "dev": "node --watch src/cli.mjs serve",
+    "demo": "node src/cli.mjs compare --scenario lost-response",
+    "test": "node --test --test-concurrency=1 test/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "test:e2e": "node scripts/browser-test.mjs"
+  },
+  "license": "MIT"
+}

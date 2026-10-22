@@ -1,0 +1,38 @@
+import { createRequire } from 'node:module';
+import { mkdir } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import { createLab } from '../src/server.mjs';
+const require = createRequire(import.meta.url);
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
+const lab = await createLab();
+const browser = await chromium.launch({ headless: true, ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}) });
+try {
+  await mkdir('test-results', { recursive: true });
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } });
+  const errors = []; page.on('pageerror', e => errors.push(e.message));
+  await page.goto(lab.url);
+  await page.locator('.scenario').last().waitFor();
+  await page.screenshot({ path: 'test-results/dashboard.png', fullPage: true });
+  await page.locator('#launch').click();
+  await page.waitForFunction(() => document.querySelector('#result-label').textContent === '已完成');
+  assert.equal(await page.locator('.badge.failed').count(), 1);
+  assert.equal(await page.locator('.badge.passed').count(), 1);
+  await page.locator('#play').click();
+  await page.waitForFunction(() => Number(document.querySelector('#scrub').value) > 2);
+  await page.locator('#play').click();
+  await page.locator('#trace-agent').selectOption('1');
+  await page.screenshot({ path: 'test-results/results.png', fullPage: true });
+  await page.locator('[data-view="history"]').click();
+  await page.locator('.history-row').first().waitFor();
+  await page.locator('[data-view="connect"]').click();
+  assert.equal(await page.locator('#connect-view').isVisible(), true);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator('[data-view="lab"]').click();
+  const overflow = await page.evaluate(() => [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > innerWidth + 1).map(e => [e.tagName,e.className,e.getBoundingClientRect().right]));
+  if (overflow.length) console.log(overflow);
+  await page.screenshot({ path: 'test-results/mobile.png', fullPage: true });
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  await page.screenshot({ path: 'test-results/mobile.png', fullPage: true });
+  assert.deepEqual(errors, []);
+  console.log('Browser smoke passed: comparison, playback, history, adapters, mobile, no JS errors.');
+} finally { await browser.close(); await lab.close(); }
